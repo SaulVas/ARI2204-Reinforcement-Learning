@@ -5,7 +5,7 @@ class Card:
         self.value = value
         self.suit = suit
 
-    def __str__(self):
+    def __repr__(self):
         return f"{self.value} of {self.suit}"
     
     def get_value(self):
