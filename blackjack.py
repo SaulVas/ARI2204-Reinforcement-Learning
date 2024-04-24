@@ -1,12 +1,12 @@
 from deck import Deck
 from general_functions import caluclate_hand_value
-# from dealer import Dealer
+from dealer import Dealer
 
 class BlackJack():
     def __init__(self, agent):
         self.deck = Deck()
         self.agent = agent
-        # self.dealer = Dealer()
+        self.dealer = Dealer()
         self.agent_hand = []
         self.dealer_hand = []
         self.state = {}
