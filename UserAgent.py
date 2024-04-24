@@ -1,7 +1,7 @@
 from AgentABC import Agent
 
 class UserAgent(Agent):
-    def get_action(self):
+    def _get_action(self):
         print("Your hand:")
         print(self.state["agent"])
         

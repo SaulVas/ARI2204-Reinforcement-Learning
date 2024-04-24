@@ -1,7 +1,9 @@
 from general_functions import calculate_hand_value 
 
 class Hand:
-    def __init__(self, hand = []):
+    def __init__(self, hand = None):
+        if hand is None:
+            hand = []
         self.hand = hand
 
     def __repr__(self):

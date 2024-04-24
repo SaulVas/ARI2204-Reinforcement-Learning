@@ -18,8 +18,8 @@ class BlackJack:
 
         # deal cards
         for _ in range(2):
-            self._deal_card(self.agent_hand)
-            self._deal_card(self.dealer_hand)
+            self.agent_hand.add_card(self.deck.draw_card())
+            self.dealer_hand.add_card(self.deck.draw_card())
     
         # agent actions
         while True:
@@ -28,8 +28,11 @@ class BlackJack:
             if self.agent.get_action() == "stand":
                 break
 
-            self._deal_card(self.agent_hand)
+            self.agent_hand.add_card(self.deck.draw_card())
             if self._is_bust(self.agent_hand):
+                print("Your hand:") #del
+                print(self.agent_hand) #del
+                print("bussssss") #del
                 return "loss"
         
         # dealer actions
@@ -38,23 +41,30 @@ class BlackJack:
             if self.dealer.get_action() == "stand":
                 break
 
-            self._deal_card(self.dealer_hand)
+            self.dealer_hand.add_card(self.deck.draw_card())
             if self._is_bust(self.dealer_hand):
+                print("Your hand:") #del
+                print(self.agent_hand) #del
+                
+                print("\nDealer's hand:") #del
+                print(self.dealer_hand) #del
                 return "win"
 
         # calculate the winner
         agent_value = self.agent_hand.get_hand_value()
         dealer_value = self.dealer_hand.get_hand_value()
 
+        print("Your hand:") #del
+        print(self.state["agent"]) #del
+        
+        print("\nDealer's hand:") #del
+        print(self.dealer_hand) #del
         if agent_value > dealer_value:
             return "win"
         elif agent_value < dealer_value:
             return "loss"
         else:
             return "tie"
-
-    def _deal_card(self, hand):
-        hand.add_card(self.deck.draw_card())
 
     def _set_state(self, agent_hand, dealer_hand):
         self.state = {

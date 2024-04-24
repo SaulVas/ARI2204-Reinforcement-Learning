@@ -4,4 +4,10 @@ from UserAgent import UserAgent
 user_agent = UserAgent()
 game = BlackJack(user_agent)
 
-game.play_round()
+ret = game.play_round()
+if ret == "win":
+    print("you won")
+elif ret == "loss": 
+    print("you lost")
+else:
+    print("tie")
