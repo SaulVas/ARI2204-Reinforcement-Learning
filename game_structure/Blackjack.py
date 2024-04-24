@@ -1,6 +1,6 @@
-from Deck import Deck
-from Dealer import Dealer
-from Hand import Hand
+from game_structure.Deck import Deck
+from agents.Dealer import Dealer
+from game_structure.Hand import Hand
 
 class BlackJack:
     def __init__(self, agent):

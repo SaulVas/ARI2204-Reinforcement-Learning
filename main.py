@@ -1,5 +1,5 @@
-from Blackjack import BlackJack
-from UserAgent import UserAgent
+from game_structure.Blackjack import BlackJack
+from agents.UserAgent import UserAgent
 
 user_agent = UserAgent()
 game = BlackJack(user_agent)

@@ -1,4 +1,4 @@
-from Hand import Hand
+from game_structure.Hand import Hand
 
 class Dealer:
     def __init__(self):

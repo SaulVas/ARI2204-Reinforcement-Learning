@@ -1,4 +1,4 @@
-from AgentABC import Agent
+from agents.AgentABC import Agent
 
 class UserAgent(Agent):
     def _get_action(self):
