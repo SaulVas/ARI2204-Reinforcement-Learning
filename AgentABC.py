@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from general_functions import calculate_hand_value
 
 class Agent(ABC):
     def __init__(self):
@@ -16,9 +15,9 @@ class Agent(ABC):
         Returns:
         str: The action to be taken, either 'hit' or 'stand'.
         """
-        if self.state["agent"].get_hand_value() < 12:
+        if self.state["agent"].calculate_hand_value() < 12:
             return "hit"
-        elif self.state["agent"].get_hand_value() == 21:
+        elif self.state["agent"].calculate_hand_value() == 21:
             return "stand"
         else:
             return self._get_action()

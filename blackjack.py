@@ -1,5 +1,4 @@
 from Deck import Deck
-from general_functions import calculate_hand_value
 from Dealer import Dealer
 from Hand import Hand
 
@@ -51,8 +50,8 @@ class BlackJack:
                 return "win"
 
         # calculate the winner
-        agent_value = self.agent_hand.get_hand_value()
-        dealer_value = self.dealer_hand.get_hand_value()
+        agent_value = self.agent_hand.calculate_hand_value()
+        dealer_value = self.dealer_hand.calculate_hand_value()
 
         print("Your hand:") #del
         print(self.state["agent"]) #del
@@ -73,7 +72,7 @@ class BlackJack:
         }
 
     def _is_bust(self, hand):
-        value = hand.get_hand_value()
+        value = hand.calculate_hand_value()
         if value > 21:
             return True
         
