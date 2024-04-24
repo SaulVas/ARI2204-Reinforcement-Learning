@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from general_functions import caluclate_hand_value
+from general_functions import calculate_hand_value
 
 class Agent(ABC):
     def __init__(self):
@@ -8,9 +8,6 @@ class Agent(ABC):
 
     def set_state(self, state):
         self.state = state
-
-    def _calculate_hand_value(self, hand):
-        return caluclate_hand_value(hand)
     
     @abstractmethod
     def get_action(self):

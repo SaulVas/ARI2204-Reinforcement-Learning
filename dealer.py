@@ -1,18 +1,14 @@
-from Deck import Deck
-from general_functions import calculate_hand_value
+from Hand import Hand
 
 class Dealer:
     def __init__(self):
-        self.hand = []
-        
+        self.hand = Hand()
+
     def set_hand(self, hand):
         self.hand = hand
 
-    def _calculate_hand_value(self):
-        return calculate_hand_value(self.hand)
-
     def get_action(self):
-        hand_value = self._calculate_hand_value()
+        hand_value = self.hand.get_hand_value()
         
         if hand_value < 17:
             return "hit"
