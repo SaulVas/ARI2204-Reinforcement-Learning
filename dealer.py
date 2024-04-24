@@ -1,4 +1,4 @@
-from deck import Deck
+from Deck import Deck
 from general_functions import calculate_hand_value
 
 class Dealer:

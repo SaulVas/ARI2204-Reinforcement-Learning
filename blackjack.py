@@ -1,8 +1,8 @@
-from deck import Deck
+from Deck import Deck
 from general_functions import caluclate_hand_value
-from dealer import Dealer
+from Dealer import Dealer
 
-class BlackJack():
+class BlackJack:
     def __init__(self, agent):
         self.deck = Deck()
         self.agent = agent
