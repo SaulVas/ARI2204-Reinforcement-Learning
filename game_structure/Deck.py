@@ -7,7 +7,7 @@ class Card:
 
     def __repr__(self):
         return f"{self.value} of {self.suit}"
-    
+
     def get_value(self):
         return self.value
 

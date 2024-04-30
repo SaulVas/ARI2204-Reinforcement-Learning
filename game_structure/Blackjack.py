@@ -19,7 +19,7 @@ class BlackJack:
         for _ in range(2):
             self.agent_hand.add_card(self.deck.draw_card())
             self.dealer_hand.add_card(self.deck.draw_card())
-    
+
         # agent actions
         while True:
             self._set_state(self.agent_hand, self.dealer_hand)
@@ -33,7 +33,7 @@ class BlackJack:
                 print(self.agent_hand) #del
                 print("bussssss") #del
                 return "loss"
-        
+
         # dealer actions
         while True:
             self.dealer.set_hand(self.dealer_hand)
@@ -44,7 +44,7 @@ class BlackJack:
             if self._is_bust(self.dealer_hand):
                 print("Your hand:") #del
                 print(self.agent_hand) #del
-                
+
                 print("\nDealer's hand:") #del
                 print(self.dealer_hand) #del
                 return "win"
@@ -55,7 +55,7 @@ class BlackJack:
 
         print("Your hand:") #del
         print(self.state["agent"]) #del
-        
+
         print("\nDealer's hand:") #del
         print(self.dealer_hand) #del
         if agent_value > dealer_value:
@@ -75,5 +75,5 @@ class BlackJack:
         value = hand.calculate_hand_value()
         if value > 21:
             return True
-        
+
         return False

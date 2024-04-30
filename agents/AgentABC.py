@@ -7,7 +7,7 @@ class Agent(ABC):
 
     def set_state(self, state):
         self.state = state
-    
+
     def get_action(self):
         """
         Returns the action (hit or stand) based on the current state.

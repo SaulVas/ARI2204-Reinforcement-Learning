@@ -9,9 +9,8 @@ class Dealer:
 
     def get_action(self):
         hand_value = self.hand.calculate_hand_value()
-        
+
         if hand_value < 17:
             return "hit"
         else:
             return "stand"
-    

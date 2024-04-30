@@ -14,7 +14,7 @@ class Hand:
 
     def add_card(self, card):
         self.hand.append(card)
-    
+
     def get_card(self, index):
         return self.hand[index]
 
@@ -22,7 +22,7 @@ class Hand:
         card_values = {
             'A': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'J': 10, 'Q': 10, 'K': 10
             }
-        
+
         value = 0
         num_aces = 0
         for card in self.hand:
@@ -32,4 +32,3 @@ class Hand:
         while value <= 11 and num_aces > 0:
             value += 10
         return value
- 

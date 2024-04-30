@@ -4,7 +4,7 @@ class UserAgent(Agent):
     def _get_action(self):
         print("Your hand:")
         print(self.state["agent"])
-        
+
         print("\nDealer's hand:")
         print(self.state["dealer"])
 
