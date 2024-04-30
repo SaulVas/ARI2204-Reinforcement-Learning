@@ -3,11 +3,11 @@ from agents.UserAgent import UserAgent
 
 user_agent = UserAgent()
 game = BlackJack(user_agent)
-ret = game.play_round()
+RET = game.play_round()
 
-if ret == "win":
+if RET == "win":
     print("you won")
-elif ret == "loss":
+elif RET == "loss":
     print("you lost")
 else:
     print("tie")
