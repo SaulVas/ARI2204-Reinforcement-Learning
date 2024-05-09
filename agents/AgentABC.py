@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 class Agent(ABC):
     def __init__(self):
-        self.state = {}
+        self.state = ()
         self.choices = ["hit", "stand"]
 
     def set_state(self, state):
@@ -15,9 +15,9 @@ class Agent(ABC):
         Returns:
         str: The action to be taken, either 'hit' or 'stand'.
         """
-        if self.state["agent"].calculate_hand_value() < 12:
+        if self.state[0] < 12:
             return "hit"
-        elif self.state["agent"].calculate_hand_value() == 21:
+        elif self.state[0] == 21:
             return "stand"
         else:
             return self._get_action()

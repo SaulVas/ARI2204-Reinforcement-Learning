@@ -9,7 +9,7 @@ class BlackJack:
         self.dealer = Dealer()
         self.agent_hand = Hand()
         self.dealer_hand = Hand()
-        self.state = {}
+        self.state = ()
 
     def play_round(self):
         self.deck.reset()
@@ -32,7 +32,7 @@ class BlackJack:
                 print("Your hand:") #del
                 print(self.agent_hand) #del
                 print("bussssss") #del
-                return "loss"
+                return -1
 
         # dealer actions
         while True:
@@ -47,29 +47,28 @@ class BlackJack:
 
                 print("\nDealer's hand:") #del
                 print(self.dealer_hand) #del
-                return "win"
+                return 1
 
         # calculate the winner
         agent_value = self.agent_hand.calculate_hand_value()
         dealer_value = self.dealer_hand.calculate_hand_value()
 
         print("Your hand:") #del
-        print(self.state["agent"]) #del
+        print(self.state[0]) #del
 
         print("\nDealer's hand:") #del
         print(self.dealer_hand) #del
         if agent_value > dealer_value:
-            return "win"
-        elif agent_value < dealer_value:
-            return "loss"
-        else:
-            return "tie"
+            return 1
+
+        if agent_value < dealer_value:
+            return -1
+
+        return 0
 
     def _set_state(self, agent_hand, dealer_hand):
-        self.state = {
-            "agent": agent_hand,
-            "dealer": dealer_hand.get_card(0)
-        }
+        agent_sum, usable_ace = agent_hand.calculate_hand_value_with_flag()
+        self.state = (agent_sum, dealer_hand.get_card(0), usable_ace,)
 
     def _is_bust(self, hand):
         value = hand.calculate_hand_value()
