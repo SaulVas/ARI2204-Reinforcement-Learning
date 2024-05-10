@@ -43,10 +43,10 @@ class MonteCarloControl(Agent):
                 epsilon = np.divide(1, self.episodes)
             elif self.epsilon_method == 1:
                 power = np.divide(self.episodes, 1000)
-                epsilon = np.exp(power)
+                epsilon = np.exp(-power)
             else:
                 power = np.divide(self.episodes, 10000)
-                epsilon = np.exp(power)
+                epsilon = np.exp(-power)
 
             policy = choices([RANDOM, BEST], weights=(epsilon, 1 - epsilon), k=1)
             if policy == RANDOM:

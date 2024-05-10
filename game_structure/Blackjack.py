@@ -4,17 +4,32 @@ from agents.Dealer import Dealer
 from game_structure.Hand import Hand
 
 class BlackJack:
-    def __init__(self, agent):
+    def __init__(self):
         self.deck = Deck()
-        self.agent = agent
+        self.agent = None
         self.dealer = Dealer()
         self.agent_hand = Hand()
         self.dealer_hand = Hand()
         self.state = ()
 
-    def play_round(self):
+    def _set_state(self, agent_hand, dealer_hand):
+        agent_sum, usable_ace = agent_hand.calculate_hand_value_with_flag()
+        self.state = (agent_sum, dealer_hand.get_card(0), usable_ace,)
+
+    def _is_bust(self, hand):
+        value = hand.calculate_hand_value()
+        if value > 21:
+            return True
+
+        return False
+
+    def _set_agent(self, agent):
+        self.agent = agent
+
+    def play_round(self, agent):
         self.deck.reset()
         self.deck.shuffle()
+        self._set_agent(agent)
         self.agent_hand.reset_hand()
         self.dealer_hand.reset_hand()
 
@@ -56,13 +71,4 @@ class BlackJack:
 
         return DRAW
 
-    def _set_state(self, agent_hand, dealer_hand):
-        agent_sum, usable_ace = agent_hand.calculate_hand_value_with_flag()
-        self.state = (agent_sum, dealer_hand.get_card(0), usable_ace,)
-
-    def _is_bust(self, hand):
-        value = hand.calculate_hand_value()
-        if value > 21:
-            return True
-
-        return False
+    
