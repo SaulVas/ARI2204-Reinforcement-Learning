@@ -1,3 +1,4 @@
+from agents.AgentABC import WIN, LOST, DRAW, STAND
 from game_structure.Deck import Deck
 from agents.Dealer import Dealer
 from game_structure.Hand import Hand
@@ -14,6 +15,8 @@ class BlackJack:
     def play_round(self):
         self.deck.reset()
         self.deck.shuffle()
+        self.agent_hand.reset_hand()
+        self.dealer_hand.reset_hand()
 
         # deal cards
         for _ in range(2):
@@ -24,47 +27,34 @@ class BlackJack:
         while True:
             self._set_state(self.agent_hand, self.dealer_hand)
             self.agent.set_state(self.state)
-            if self.agent.get_action() == "stand":
+            if self.agent.get_action() == STAND:
                 break
 
             self.agent_hand.add_card(self.deck.draw_card())
             if self._is_bust(self.agent_hand):
-                print("Your hand:") #del
-                print(self.agent_hand) #del
-                print("bussssss") #del
-                return -1
+                return LOST
 
         # dealer actions
         while True:
             self.dealer.set_hand(self.dealer_hand)
-            if self.dealer.get_action() == "stand":
+            if self.dealer.get_action() == STAND:
                 break
 
             self.dealer_hand.add_card(self.deck.draw_card())
             if self._is_bust(self.dealer_hand):
-                print("Your hand:") #del
-                print(self.agent_hand) #del
-
-                print("\nDealer's hand:") #del
-                print(self.dealer_hand) #del
-                return 1
+                return WIN
 
         # calculate the winner
         agent_value = self.agent_hand.calculate_hand_value()
         dealer_value = self.dealer_hand.calculate_hand_value()
 
-        print("Your hand:") #del
-        print(self.state[0]) #del
-
-        print("\nDealer's hand:") #del
-        print(self.dealer_hand) #del
         if agent_value > dealer_value:
-            return 1
+            return WIN
 
         if agent_value < dealer_value:
-            return -1
+            return LOST
 
-        return 0
+        return DRAW
 
     def _set_state(self, agent_hand, dealer_hand):
         agent_sum, usable_ace = agent_hand.calculate_hand_value_with_flag()

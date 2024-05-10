@@ -55,3 +55,6 @@ class Hand:
             has_usable_ace = True  
 
         return value, has_usable_ace
+    
+    def reset_hand(self):
+        self.hand = []

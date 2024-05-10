@@ -1,9 +1,15 @@
 from abc import ABC, abstractmethod
 
+STAND = 0
+HIT = 1
+
+LOST = -1
+WIN = 1
+DRAW = 0
+
 class Agent(ABC):
     def __init__(self):
         self.state = ()
-        self.choices = ["hit", "stand"]
 
     def set_state(self, state):
         self.state = state
@@ -16,9 +22,9 @@ class Agent(ABC):
         str: The action to be taken, either 'hit' or 'stand'.
         """
         if self.state[0] < 12:
-            return "hit"
+            return HIT
         elif self.state[0] == 21:
-            return "stand"
+            return STAND
         else:
             return self._get_action()
 
