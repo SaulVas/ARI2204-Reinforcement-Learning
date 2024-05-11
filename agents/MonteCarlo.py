@@ -19,11 +19,17 @@ class MonteCarloControl(Agent):
     """
     def __init__(self, epsilon_method=0, exploring_starts=False):
         super().__init__()
-        self.epsilon_method = epsilon_method 
+        self.epsilon_method = epsilon_method
         self.exploring_starts = exploring_starts
         self.episodes = 0
         self.current_episode = []
         self.state_action_values = defaultdict(default_q_values)
+
+    def __repr__(self):
+        ret = f"MC_{self.epsilon_method}"
+        if self.exploring_starts:
+            ret = ret + "_ES"
+        return ret
 
     def update_q_values(self, new_values, reward):
         for state in new_values:
