@@ -51,7 +51,7 @@ class BlackJack:
 
             self.agent_hand.add_card(self.deck.draw_card())
             if self._is_bust(self.agent_hand):
-                return LOSS
+                reward = LOSS
 
         # dealer actions
         while True:
@@ -61,17 +61,21 @@ class BlackJack:
 
             self.dealer_hand.add_card(self.deck.draw_card())
             if self._is_bust(self.dealer_hand):
-                return WIN
+                reward = WIN
 
         # calculate the winner
         agent_value = self.agent_hand.calculate_hand_value()
         dealer_value = self.dealer_hand.calculate_hand_value()
 
         if agent_value > dealer_value:
-            return WIN
+            reward = WIN
         if agent_value < dealer_value:
-            return LOSS
-        return DRAW
+            reward = LOSS
+        else:
+            reward = DRAW
+
+        self.agent.update_q_values(agent.get_episode(), reward)
+        return reward
 
     def play_round_SARSA_Q(self, agent):
         self.initialise_round(agent)

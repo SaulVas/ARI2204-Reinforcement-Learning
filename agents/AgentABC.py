@@ -22,7 +22,7 @@ class Agent(ABC):
     2 - e^-k/10000
     3 - 0.1
     """
-    def __init__(self, epsilon_method=0,):
+    def __init__(self, epsilon_method=0):
         self.state = ()
         self.epsilon_method = epsilon_method
         self.episodes = 0
@@ -44,6 +44,13 @@ class Agent(ABC):
 
     def remove_state_action_value(self, index):
         self.current_episode.pop(index)
+
+    def _best_action(self):
+        if (self.state_action_values[(self.state, HIT)][0] >=
+            self.state_action_values[(self.state,STAND)][0]):
+            return HIT
+
+        return STAND
 
     def get_action(self):
         """

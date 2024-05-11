@@ -4,8 +4,6 @@ from agents.AgentABC import Agent, HIT, STAND, RANDOM, BEST
 
 class MonteCarloControl(Agent):
     def __init__(self, epsilon_method, exploring_starts=False):
-        if epsilon_method < 0 or epsilon_method > 2:
-            raise ValueError("Incorrect Epsilon Method")
         super().__init__(epsilon_method)
         self.exploring_starts = exploring_starts
 
@@ -16,14 +14,14 @@ class MonteCarloControl(Agent):
         return ret
 
     def update_q_values(self, new_values, reward):
-        for state in new_values:
+        for q in new_values:
             # update count for states visited
-            self.state_action_values[state][1] += 1
-            count = self.state_action_values[state][1]
+            self.state_action_values[q][1] += 1
+            count = self.state_action_values[q][1]
 
             # update state-action values for states visited
-            q_value = self.state_action_values[state][0]
-            self.state_action_values[state][0] = q_value + np.divide(1, count) * (reward - q_value)
+            q_value = self.state_action_values[q][0]
+            self.state_action_values[q][0] = q_value + np.divide(1, count) * (reward - q_value)
 
     def _get_action(self):
         if self.exploring_starts and len(self.current_episode) == 0:
@@ -46,10 +44,3 @@ class MonteCarloControl(Agent):
 
         self.current_episode.append((self.state, action))
         return action
-
-    def _best_action(self):
-        if (self.state_action_values[(self.state, HIT)][0] >=
-            self.state_action_values[(self.state,STAND)][0]):
-            return HIT
-
-        return STAND
