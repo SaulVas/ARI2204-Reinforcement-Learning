@@ -5,8 +5,11 @@ class Card:
         self.value = value
         self.suit = suit
 
-    def __str__(self):
+    def __repr__(self):
         return f"{self.value} of {self.suit}"
+
+    def get_value(self):
+        return self.value
 
 class Deck:
     def __init__(self):
@@ -16,10 +19,10 @@ class Deck:
     def reset(self):
         self.cards = []
         suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
-        ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+        values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
         for suit in suits:
-            for rank in ranks:
-                self.cards.append(Card(rank, suit))
+            for value in values:
+                self.cards.append(Card(value, suit))
 
     def shuffle(self):
         random.shuffle(self.cards)
@@ -28,4 +31,3 @@ class Deck:
         if len(self.cards) == 0:
             return None
         return self.cards.pop()
-
