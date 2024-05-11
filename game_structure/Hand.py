@@ -21,20 +21,24 @@ class Hand:
     def calculate_hand_value(self):
         card_values = {
             'A': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'J': 10, 'Q': 10, 'K': 10
-            }
+        }
 
         value = 0
         num_aces = 0
 
+        # Calculate initial value of the hand and count aces
         for card in self.hand:
-            value += card_values[card.get_value()]
-            if card.get_value() == 'A':
+            card_value = card.get_value()
+            value += card_values[card_value]
+            if card_value == 'A':
                 num_aces += 1
 
+        # Adjust the value of aces if possible
         while value <= 11 and num_aces > 0:
-            value += 10
+            value += 10  # Upgrade an ace from 1 to 11
+            num_aces -= 1
 
-        return value  
+        return value
 
     def calculate_hand_value_with_flag(self):
         card_values = {
@@ -43,7 +47,7 @@ class Hand:
 
         value = 0
         num_aces = 0
-        has_usable_ace = False  
+        has_usable_ace = False
 
         for card in self.hand:
             value += card_values[card.get_value()]
@@ -52,7 +56,7 @@ class Hand:
 
         while value <= 11 and num_aces > 0:
             value += 10
-            has_usable_ace = True  
+            has_usable_ace = True
 
         return value, has_usable_ace
     

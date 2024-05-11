@@ -22,11 +22,13 @@ class Agent(ABC):
     2 - e^-k/10000
     3 - 0.1
     """
-    def __init__(self, epsilon_method=0):
+    def __init__(self, epsilon_method=0, current_episode=None):
         self.state = ()
         self.epsilon_method = epsilon_method
         self.episodes = 0
-        self.current_episode = []
+        if current_episode is None:
+            current_episode = []
+        self.current_episode = current_episode
         self.state_action_values = defaultdict(default_q_values)
 
     def set_state(self, state):
