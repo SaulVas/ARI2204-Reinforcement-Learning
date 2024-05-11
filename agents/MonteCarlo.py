@@ -1,29 +1,13 @@
 from random import randint, choices
-from collections import defaultdict
 import numpy as np
-from agents.AgentABC import Agent, HIT, STAND
-
-RANDOM = 0
-BEST = 1
-
-def default_q_values():
-    return [0, 0]
-
+from agents.AgentABC import Agent, HIT, STAND, RANDOM, BEST
 
 class MonteCarloControl(Agent):
-    """
-    epsilon_method: refers to the method of computing epsilon:
-    0 - 1/k
-    1 - e^-k/1000
-    2 - e^-k/10000
-    """
-    def __init__(self, epsilon_method=0, exploring_starts=False):
-        super().__init__()
-        self.epsilon_method = epsilon_method
+    def __init__(self, epsilon_method, exploring_starts=False):
+        if epsilon_method < 0 or epsilon_method > 2:
+            raise ValueError("Incorrect Epsilon Method")
+        super().__init__(epsilon_method)
         self.exploring_starts = exploring_starts
-        self.episodes = 0
-        self.current_episode = []
-        self.state_action_values = defaultdict(default_q_values)
 
     def __repr__(self):
         ret = f"MC_{self.epsilon_method}"
@@ -69,10 +53,3 @@ class MonteCarloControl(Agent):
             return HIT
 
         return STAND
-
-    def new_episode(self):
-        self.episodes += 1
-        self.current_episode = []
-
-    def get_episode(self):
-        return self.current_episode
