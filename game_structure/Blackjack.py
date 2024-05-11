@@ -36,7 +36,6 @@ class BlackJack:
 
     def play_round_MC(self, agent):
         self.initialise_round(agent)
-        reward = DRAW
 
         # deal cards
         for _ in range(2):
@@ -52,29 +51,32 @@ class BlackJack:
 
             self.agent_hand.add_card(self.deck.draw_card())
             if self._is_bust(self.agent_hand):
-                reward = LOSS
                 break
 
         # dealer actions
-        while True and reward != LOSS:
+        while not self._is_bust(self.agent_hand):
             self.dealer.set_hand(self.dealer_hand)
             if self.dealer.get_action() == STAND:
                 break
 
             self.dealer_hand.add_card(self.deck.draw_card())
             if self._is_bust(self.dealer_hand):
-                reward = WIN
                 break
 
         # calculate the winner
         agent_value = self.agent_hand.calculate_hand_value()
         dealer_value = self.dealer_hand.calculate_hand_value()
 
-        if agent_value <= 21 and dealer_value <= 21:
-            if agent_value > dealer_value:
-                reward = WIN
-            elif agent_value < dealer_value:
-                reward = LOSS
+        if agent_value > 21:
+            reward = LOSS
+        elif dealer_value > 21:
+            reward = WIN
+        elif agent_value > dealer_value:
+            reward = WIN
+        elif agent_value < dealer_value:
+            reward = LOSS
+        else:
+            reward = DRAW
 
         self.agent.update_q_values(agent.get_episode(), reward)
         return reward
