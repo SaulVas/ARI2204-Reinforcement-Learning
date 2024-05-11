@@ -26,12 +26,16 @@ class BlackJack:
     def _set_agent(self, agent):
         self.agent = agent
 
-    def play_round_MC(self, agent):
+    def initialise_round(self, agent):
         self.deck.reset()
         self.deck.shuffle()
         self._set_agent(agent)
+        self.agent.new_episode()
         self.agent_hand.reset_hand()
         self.dealer_hand.reset_hand()
+
+    def play_round_MC(self, agent):
+        self.initialise_round(agent)
 
         # deal cards
         for _ in range(2):
@@ -70,11 +74,7 @@ class BlackJack:
         return DRAW
 
     def play_round_SARSA_Q(self, agent):
-        self.deck.reset()
-        self.deck.shuffle()
-        self._set_agent(agent)
-        self.agent_hand.reset_hand()
-        self.dealer_hand.reset_hand()
+        self.initialise_round(agent)
 
         # deal cards
         for _ in range(2):

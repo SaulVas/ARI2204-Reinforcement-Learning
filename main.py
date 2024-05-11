@@ -4,7 +4,6 @@ from agents.MonteCarlo import MonteCarloControl
 from agents.AgentABC import WIN, DRAW
 
 def monte_carlo_round(agent, game, rewards):
-    agent.new_episode()
     reward = game.play_round(agent)
     episode = agent.get_episode()
     agent.update_q_values(episode, reward)
