@@ -14,7 +14,8 @@ class BlackJack:
 
     def _set_state(self, agent_hand, dealer_hand):
         agent_sum, usable_ace = agent_hand.calculate_hand_value_with_flag()
-        self.state = (agent_sum, dealer_hand.get_card(0), usable_ace,)
+
+        self.state = (agent_sum, dealer_hand.get_card_value(0), usable_ace,)
 
     def _is_bust(self, hand):
         value = hand.calculate_hand_value()
@@ -121,7 +122,7 @@ class BlackJack:
 
         if agent_value > dealer_value:
             # Player gets blackjack
-            if len(agent.get_episode() == 1):
+            if len(agent.get_episode()) == 1:
                 agent.update_q_values(agent.get_state_action_value(-1), None, WIN, True)
             return WIN
 

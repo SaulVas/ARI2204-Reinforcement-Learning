@@ -3,7 +3,7 @@ from game_structure.Blackjack import BlackJack
 from agents.MonteCarlo import MonteCarloControl
 from agents.Sarsa import SarsaControl
 from agents.QLearning import QlearningControl
-from agents.AgentABC import WIN, LOSS
+from agents.AgentABC import WIN, DRAW
 
 def monte_carlo_round(agent, game, tally):
     reward = game.play_round_MC(agent)
@@ -16,7 +16,7 @@ def sarsa_q_round(agent, game, tally):
 def update_reward_tally(reward, tally):
     if reward == WIN:
         tally[0] += 1
-    elif reward == LOSS:
+    elif reward == DRAW:
         tally[1] += 1
     else:
         tally[2] += 1
@@ -58,19 +58,19 @@ if __name__ == "__main__":
         "QLearning3": [0, 0, 0],
     }
 
-    for _ in range(10000000):
+    for _ in range(100000):
         monte_carlo_round(MCES, blackjack, score['MCES'])
         monte_carlo_round(MC0, blackjack, score['MC0'])
         monte_carlo_round(MC1, blackjack, score['MC1'])
         monte_carlo_round(MC2, blackjack, score['MC2'])
-        # sarsa_q_round(SARSA0, blackjack, score['SARSA0'])
-        # sarsa_q_round(SARSA1, blackjack, score['SARSA1'])
-        # sarsa_q_round(SARSA2, blackjack, score['SARSA2'])
-        # sarsa_q_round(SARSA3, blackjack, score['SARSA3'])
-        # sarsa_q_round(Q0, blackjack, score['QLearning0'])
-        # sarsa_q_round(Q1, blackjack, score['QLearning1'])
-        # sarsa_q_round(Q3, blackjack, score['QLearning2'])
-        # sarsa_q_round(Q3, blackjack, score['QLearning3'])
+        sarsa_q_round(SARSA0, blackjack, score['SARSA0'])
+        sarsa_q_round(SARSA1, blackjack, score['SARSA1'])
+        sarsa_q_round(SARSA2, blackjack, score['SARSA2'])
+        sarsa_q_round(SARSA3, blackjack, score['SARSA3'])
+        sarsa_q_round(Q0, blackjack, score['QLearning0'])
+        sarsa_q_round(Q1, blackjack, score['QLearning1'])
+        sarsa_q_round(Q3, blackjack, score['QLearning2'])
+        sarsa_q_round(Q3, blackjack, score['QLearning3'])
 
 
     print(f"MCES: Wins: {score['MCES'][0]}, Draws: {score['MCES'][1]}, Losses: {score["MCES"][2]}")

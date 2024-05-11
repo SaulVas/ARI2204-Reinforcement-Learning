@@ -15,8 +15,8 @@ class Hand:
     def add_card(self, card):
         self.hand.append(card)
 
-    def get_card(self, index):
-        return self.hand[index]
+    def get_card_value(self, index):
+        return self.hand[index].get_value()
 
     def calculate_hand_value(self):
         card_values = {
