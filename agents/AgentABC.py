@@ -39,8 +39,11 @@ class Agent(ABC):
     def get_episode(self):
         return self.current_episode
 
-    def get_q(self, index):
+    def get_state_action_value(self, index):
         return self.current_episode[index]
+
+    def remove_state_action_value(self, index):
+        self.current_episode.pop(index)
 
     def get_action(self):
         """
@@ -50,8 +53,10 @@ class Agent(ABC):
         str: The action to be taken, either 'hit' or 'stand'.
         """
         if self.state[0] < 12:
+            self.current_episode.append((self.state, HIT))
             return HIT
         elif self.state[0] == 21:
+            self.current_episode.append((self.state, STAND))
             return STAND
         else:
             return self._get_action()
