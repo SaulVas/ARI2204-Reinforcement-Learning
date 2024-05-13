@@ -35,6 +35,59 @@ class BlackJack:
         self.agent_hand.reset_hand()
         self.dealer_hand.reset_hand()
 
+    # To play black jack myself :)
+    def play_round(self, agent):
+        self.deck.reset()
+        self.deck.shuffle()
+        self._set_agent(agent)
+        self.agent_hand.reset_hand()
+        self.dealer_hand.reset_hand()
+
+        for _ in range(2):
+            self.agent_hand.add_card(self.deck.draw_card())
+            self.dealer_hand.add_card(self.deck.draw_card())
+
+        # agent actions
+        while True:
+            self._set_state(self.agent_hand, self.dealer_hand)
+            self.agent.set_state(self.state)
+            print(self.agent_hand)
+            if self.agent.get_action() == STAND:
+                break
+
+            self.agent_hand.add_card(self.deck.draw_card())
+            if self._is_bust(self.agent_hand):
+                break
+
+        # dealer actions
+        while not self._is_bust(self.agent_hand):
+            self.dealer.set_hand(self.dealer_hand)
+            
+            if self.dealer.get_action() == STAND:
+                break
+
+            self.dealer_hand.add_card(self.deck.draw_card())
+            if self._is_bust(self.dealer_hand):
+                break
+
+        # calculate the winner
+        agent_value = self.agent_hand.calculate_hand_value()
+        dealer_value = self.dealer_hand.calculate_hand_value()
+
+        if agent_value > 21:
+            reward = LOSS
+        elif dealer_value > 21:
+            reward = WIN
+        elif agent_value > dealer_value:
+            reward = WIN
+        elif agent_value < dealer_value:
+            reward = LOSS
+        else:
+            reward = DRAW
+
+        return (reward, self.agent_hand, self.dealer_hand)
+
+
     def play_round_MC(self, agent):
         self.initialise_round(agent)
 
