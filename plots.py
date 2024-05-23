@@ -82,30 +82,6 @@ def plot_unique_state_action_pairs(results):
                 'Unique State-Action Pairs for Q-Learning',
                 'unique_state_action_pairs_q_learning.png')
 
-def calculate_dealer_advantage(results):
-    os.makedirs(save_dir, exist_ok=True)
-    advantages = {}
-    for agent, values in results.items():
-        scores = np.array(values['scores'])
-        last_10k_scores = scores[-10:]
-        mean_losses = np.mean(last_10k_scores[:, 2])
-        mean_wins = np.mean(last_10k_scores[:, 0])
-        advantage = (mean_losses - mean_wins) / (mean_losses + mean_wins)
-        advantages[agent] = advantage
-
-    agents = list(advantages.keys())
-    advantages_values = list(advantages.values())
-
-    plt.figure(figsize=(14, 8))
-    plt.bar(agents, advantages_values)
-    plt.xlabel('Agents')
-    plt.ylabel('Dealer Advantage')
-    plt.title('Dealer Advantage Across Algorithm Configurations')
-    plt.xticks(rotation=90)
-    plt.tight_layout()
-    plt.savefig(os.path.join(save_dir, 'dealer_advantage.png'))
-    plt.close()
-
 def create_strategy_table(q_values, ace=True):
     strategy_table = pd.DataFrame(index=range(20, 11, -1), columns=['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'])
     dealer_cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
@@ -147,3 +123,26 @@ def generate_and_save_strategy_tables(results):
         strategy_table_with_ace = create_strategy_table(q_values, ace=True)
         strategy_table_without_ace = create_strategy_table(q_values, ace=False)
         save_strategy_table_plot(strategy_table_with_ace, strategy_table_without_ace, agent)
+
+def calculate_dealer_advantage(results):
+    advantages = {}
+    for agent, values in results.items():
+        scores = np.array(values['scores'])
+        last_10k_scores = scores[-10:]
+        mean_losses = np.mean(last_10k_scores[:, 2])
+        mean_wins = np.mean(last_10k_scores[:, 0])
+        advantage = (mean_losses - mean_wins) / (mean_losses + mean_wins)
+        advantages[agent] = advantage
+
+    agents = list(advantages.keys())
+    advantages_values = list(advantages.values())
+
+    plt.figure(figsize=(14, 8))
+    plt.bar(agents, advantages_values)
+    plt.xlabel('Agents')
+    plt.ylabel('Dealer Advantage')
+    plt.title('Dealer Advantage Across Algorithm Configurations')
+    plt.xticks(rotation=90)
+    plt.tight_layout()
+    plt.savefig(os.path.join(save_dir, 'dealer_advantage.png'))
+    plt.close()
