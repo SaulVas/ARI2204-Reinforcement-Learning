@@ -62,7 +62,7 @@ class BlackJack:
         # dealer actions
         while not self._is_bust(self.agent_hand):
             self.dealer.set_hand(self.dealer_hand)
-            
+
             if self.dealer.get_action() == STAND:
                 break
 
@@ -177,6 +177,9 @@ class BlackJack:
             # Player gets blackjack
             if len(agent.get_episode()) == 1:
                 agent.update_q_values(agent.get_state_action_value(-1), None, WIN, True)
+            else:
+                agent.update_q_values(agent.get_state_action_value(-2),
+                                      agent.get_state_action_value(-1), WIN, True)
             return WIN
 
         if agent_value < dealer_value:
