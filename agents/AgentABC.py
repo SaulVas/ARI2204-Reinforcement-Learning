@@ -43,6 +43,9 @@ class Agent(ABC):
 
     def get_state_action_value(self, index):
         return self.current_episode[index]
+    
+    def get_state_action_values(self):
+        return self.state_action_values
 
     def remove_state_action_value(self, index):
         self.current_episode.pop(index)
