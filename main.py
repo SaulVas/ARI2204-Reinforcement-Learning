@@ -4,6 +4,7 @@ from agents.MonteCarlo import MonteCarloControl
 from agents.Sarsa import SarsaControl
 from agents.QLearning import QlearningControl
 from evaluation import run_evaluation
+from plots import plot_wins_losses_draws, plot_state_action_counts, plot_unique_state_action_pairs, calculate_dealer_advantage, generate_and_save_strategy_tables
 
 if __name__ == "__main__":
     # user_agent = UserAgent()
@@ -43,3 +44,9 @@ if __name__ == "__main__":
         print(len(values['scores']))
         print(len(values['agent_values']))
         print("\n")
+
+    plot_wins_losses_draws(results)
+    plot_state_action_counts(results)
+    plot_unique_state_action_pairs(results)
+    calculate_dealer_advantage(results)
+    generate_and_save_strategy_tables(results)

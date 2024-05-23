@@ -4,7 +4,7 @@ from agents.AgentABC import Agent, HIT, STAND, RANDOM, BEST
 
 class QlearningControl(Agent):
     def __repr__(self):
-        return f"SARSA_{self.epsilon_method}"
+        return f"QLearning_{self.epsilon_method}"
 
     def update_q_values(self, q, q_1, reward, is_final_state):
         # count update
