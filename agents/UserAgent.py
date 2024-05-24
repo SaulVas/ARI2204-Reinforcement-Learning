@@ -1,4 +1,4 @@
-from agents.AgentABC import Agent
+from agents.AgentABC import Agent, HIT, STAND
 
 class UserAgent(Agent):
     def _get_action(self):
@@ -10,7 +10,11 @@ class UserAgent(Agent):
 
         choice = input("\nWould you like to 'hit' or 'stand'?\n").lower()
 
-        while choice not in self.choices:
-            choice = input("Invalid choice, try again")
+        while True:
+            if choice == "hit":
+                return HIT
+            if choice == "stand":
+                return STAND
 
-        return choice
+            print("Invalid input, try again:")
+            choice = input("\nWould you like to 'hit' or 'stand'?\n").lower()

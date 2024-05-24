@@ -1,4 +1,5 @@
 from game_structure.Hand import Hand
+from agents.AgentABC import HIT, STAND
 
 class Dealer:
     def __init__(self):
@@ -11,6 +12,6 @@ class Dealer:
         hand_value = self.hand.calculate_hand_value()
 
         if hand_value < 17:
-            return "hit"
+            return HIT
         else:
-            return "stand"
+            return STAND
