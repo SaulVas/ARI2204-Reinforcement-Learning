@@ -6,7 +6,7 @@ Saul Vassallo and Nick Gerty
 
 Our project is structured as follows:
 
-### Base Directory
+### Base Directory
 
 This includes the following files:
 
@@ -262,7 +262,7 @@ self.agent.update_q_values(agent.get_episode(), reward)
 return reward
 ```
 
-## SARSA Implementation
+## SARSA Implementation
 
 The _SarsaControl_ class inherits from the _AgentABC_.
 
@@ -422,7 +422,7 @@ def update_q_values(self, q, q_1, reward, is_final_state):
 
 This algorithm uses the same blackjack class method to play the game, thus it's values are updated at the exact same points as SARSA.
 
-## Results and Analysis
+## Results and Analysis
 
 The following functions were created to gather the relevant information for each agent:
 
@@ -604,3 +604,24 @@ SARSA and QLearning opt to hit on anything that has a usable ace, while standing
 Algorithm wise, SARSA is the algorithm with the lowest average dealer advantage, next is QLearning and finally in last place is Monte Carlo Methods with a considerable worse average score.  
 Of the SARSA implentations, an &epsilon; of 0.1 does the best of the 4.  
 Despite SARSA being the best, due to the fact that both SARSA and QLearning are following the same strategy, this result is purely down to chance and it is difficult to say which of the algorithms actually minimizes dealer advantage.
+
+## References
+
+[1] R. S. Sutton and A. Barto, Reinforcement learning : an introduction. Cambridge, Ma ; Lodon: The Mit Press, 2018.
+
+[2] A. D, “Reinforcement Learning model for BlackJack,” Medium, Dec. 17, 2022. https://medium.com/@Andrew_D./reinforcement-learning-model-for-blackjack-a29817218d53 (accessed May 23, 2024).
+‌
+
+## Distribution of Work
+
+### Saul:
+
+- Sarsa
+- QLearning
+- Evaluation
+
+### Nick:
+
+- Game Structure
+- Monte Carlo
+- Plotting
