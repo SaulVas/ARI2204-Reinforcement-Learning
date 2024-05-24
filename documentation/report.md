@@ -18,7 +18,7 @@ This includes the following files:
    - Contains functions used to plot data gathered during the evaluation process.
 4. requirements.txt
    - Contains the packages required to run our code in a virtual environment.
-5. playBlackjack:).py
+5. playBlackjack.py
    - Contains code allowing us to play our blackjack game for fun...
 
 The base directory also includes the following subdirectories:
@@ -38,7 +38,7 @@ Different methods were necessary since the Monte Carlo algorithm updates its Q-V
 
 The _MonteCarlo_, _Sarsa_ and _QLearning_ classes all inherit from _AgentABC_. The abstract base class defines the following global constants that are used throughout the project.
 
-### Global Variables
+### Global Variables
 
 ```python
 STAND = 0
@@ -601,7 +601,7 @@ SARSA and QLearning opt to hit on anything that has a usable ace, while standing
 
 #### Dealer Advantage
 
-Algorithm wise, SARSA is the algorithm with the lowest average dealer advantage, next is QLearning and finally in last place is Monte Carlo Methods with a considerable worse average score.  
+Algorithm wise, SARSA is the algorithm with the lowest average dealer advantage, next is QLearning and finally in last place is Monte Carlo Methods with a considerably worse average score.  
 Of the SARSA implentations, an &epsilon; of 0.1 does the best of the 4.  
 Despite SARSA being the best, due to the fact that both SARSA and QLearning are following the same strategy, this result is purely down to chance and it is difficult to say which of the algorithms actually minimizes dealer advantage.
 
